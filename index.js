@@ -13,7 +13,7 @@ require('./routes/user')(app)
 require('./routes/recruit')(app)
 require('./routes/postulation')(app)
 require('./routes/notification')(app)
-require('./routes/crearOferta')(app)
+require('./routes/CreateOffer')(app)
 require('./routes/company')(app)
 
 
