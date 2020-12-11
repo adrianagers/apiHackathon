@@ -1,6 +1,7 @@
 const NotificationModel =require('../models/notification')
+const notificationController = {};
 
-exports.create = (req, res) => {
+notificationController.create = (req, res) => {
     if (Object.entries(req.body).length == 0) {
        return res.status(400).send({
           message: 'los datos son obligatorios'
@@ -23,7 +24,7 @@ exports.create = (req, res) => {
             })
         })
 }
- exports.update=(req,res)=>{
+notificationController.update=(req,res)=>{
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
             message: 'los datos son obligatorios'
@@ -49,3 +50,4 @@ exports.create = (req, res) => {
         )
 }
 
+module.exports = notificationController

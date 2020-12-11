@@ -1,5 +1,6 @@
 const CreateOfferModel = require ('../models/createoffer');
-exports.create = (req, res) => {
+const createOfferController = {};
+createOfferController.create = (req, res) => {
    
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
@@ -27,7 +28,7 @@ exports.create = (req, res) => {
         })
     })
 }
-exports.update = (req, res) => {
+createOfferController.update = (req, res) => {
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
             message: 'Los datos son obligatorios.'
@@ -57,3 +58,6 @@ exports.update = (req, res) => {
             }
         )
 }
+
+
+module.exports = createOfferController

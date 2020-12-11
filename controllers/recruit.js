@@ -1,5 +1,6 @@
 const RecruitModel = require('../models/recruit');
-exports.create = (req, res) => {
+const recruitController = {};
+recruitController.create = (req, res) => {
 
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
@@ -22,7 +23,7 @@ exports.create = (req, res) => {
         })
     })
 }
-exports.update = (req, res) => {
+recruitController.update = (req, res) => {
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
             message: 'Los datos son obligatorios.'
@@ -48,3 +49,5 @@ exports.update = (req, res) => {
             }
         )
 }
+
+module.exports = recruitController
