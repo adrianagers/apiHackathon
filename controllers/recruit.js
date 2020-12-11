@@ -1,13 +1,7 @@
 const RecruitModel = require('../models/recruit');
-/**
- * Metodo para almacenal un nuevo usuario 
- * @param {*} req => todo lo que enviamos desde el dody (formulario)
- * @param {*} res => la respuesta que se devolvera 
- */
 exports.create = (req, res) => {
 
     if (Object.entries(req.body).length == 0) {
-        // console.log('esta llegando')
         return res.status(400).send({
             message: 'Los datos son obligatorios.'
         })
