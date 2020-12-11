@@ -1,4 +1,4 @@
-const CrarOfertaModel = require('../models/crearOferta');
+const CreateOfferModel = require ('../models/createoffer');
 /**
  * Metodo para almacenal un nuevo usuario 
  * @param {*} req => todo lo que enviamos desde el dody (formulario)
@@ -16,18 +16,19 @@ exports.create = (req, res) => {
         })
     }
 
-    const crearOferta = new CrarOfertaModel({
+    const createOffer = new CreateOfferModel({
         title: req.body.title,
         description: req.body.description,
-        cargo: req.body.cargo,
+        Position: req.body.Position,
         salary: req.body.salary,
-        ubicacion: req.body.ubicacion,
+        Location: req.body.ubicacion,
         termTime: req.body.termTime 
 
     })
 
-    crearOferta.save().then((dataoferta) => {
-        res.send(dataoferta)
+    createOffer.save()
+    .then((dataoffer) => {
+        res.send(dataoffer)
     }).catch((error) => {
         res.status(500).send({
             message: error.message
@@ -47,20 +48,20 @@ exports.update = (req, res) => {
         })
     }
 
-    const crearOferta = {
+    const createOffer = {
         title: req.body.title,
         description: req.body.description,
-        cargo: req.body.cargo,
+        Position: req.body.Position,
         salary: req.body.salary,
-        ubicacion: req.body.ubicacion,
+        Location: req.body.ubicacion,
         termTime: req.body.termTime 
 
     }
     
-    CrarOfertaModel.findByIdAndUpdate(req.params.id, crearOferta)
+    CreateOfferModel.findByIdAndUpdate(req.params.id, createOffer)
         .then(
-            (ofertaUpdate) => {
-                res.send(ofertaUpdate)
+            (offerUpdate) => {
+                res.send(offerUpdate)
             }
         ).catch(
             (error) => {
@@ -70,6 +71,3 @@ exports.update = (req, res) => {
             }
         )
 }
-
-
-// faltan creo que cuatro  si no estoy mal si 
