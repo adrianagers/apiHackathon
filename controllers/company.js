@@ -1,6 +1,8 @@
 const CompanyModel =require('../models/company') 
+const companyController = {};
 
-exports.create = (req, res) => {
+
+companyController.create = (req, res) => {
    
     if (Object.entries(req.body).length == 0) {
        return res.status(400).send({
@@ -25,7 +27,11 @@ exports.create = (req, res) => {
         })
 }
 
- exports.update=(req,res)=>{
+
+
+
+
+ companyController.update=(req,res)=>{
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
             message: 'los datos son obligatorios'
@@ -54,7 +60,7 @@ exports.create = (req, res) => {
         )
 }
 
-exports.getAll=(req,res)=>{
+companyController.getAll=(req,res)=>{
     CompanyModel.find()
    
     .then((company)=>{res.send(company)})
@@ -68,7 +74,7 @@ exports.getAll=(req,res)=>{
 }
 
 
-exports.getOne=(req,res)=>{
+companyController.getOne=(req,res)=>{
     CompanyModel.findById(req.params.id)
     .then((company)=>{res.send(company)})
     .catch(
@@ -81,7 +87,7 @@ exports.getOne=(req,res)=>{
 }
 
 
-exports.deleteOne=(req,res)=>{
+companyController.deleteOne=(req,res)=>{
     CompanyModel.findByIdAndRemove(req.params.id)
     .then((company)=>{res.send(company)})
     .catch(
@@ -92,4 +98,6 @@ exports.deleteOne=(req,res)=>{
     }
 
     )
-}
+
+} 
+module.exports = companyController

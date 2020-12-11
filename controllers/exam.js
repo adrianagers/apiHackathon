@@ -1,7 +1,7 @@
-const exam = require('../models/exam')
+const examController = {};
 const ExamModel = require('../models/exam')
 
-exports.create = (req, res) => {
+examController.create = (req, res) => {
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
             message: 'Los datos son obligatorios'
@@ -25,7 +25,7 @@ exports.create = (req, res) => {
         })
 }
 
-exports.update = (req, res) => {
+examController.update = (req, res) => {
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
             message: 'Los datos son obligatorios.'
@@ -57,7 +57,7 @@ exports.update = (req, res) => {
         )    
 }
 
-exports.getAll =(req, res) => {
+examController.getAll =(req, res) => {
     ExamModel.find()
     .populate('companies')
     .exec()
@@ -70,7 +70,7 @@ exports.getAll =(req, res) => {
         }
     )
 }
-exports.getOne = (req, res) => {
+examController.getOne = (req, res) => {
     ExamModel.findById(req.params.id)
     .populate('companies')
     .exec()
@@ -83,7 +83,7 @@ exports.getOne = (req, res) => {
         }
     )
 }
-exports.deleteOne= (req,res) => {
+examController.deleteOne= (req,res) => {
     ExamModel.findByIdAndRemove(req.params.id)
     .then((exam)=> {res.send(exam)})
     .catch(
@@ -95,4 +95,4 @@ exports.deleteOne= (req,res) => {
     )
 }
 
-// 
+module.exports = examController

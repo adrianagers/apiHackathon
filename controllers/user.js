@@ -1,7 +1,8 @@
 const UserModel = require('../models/user');
+const userController = {};
 const bcript = require('bcryptjs');
 
-exports.create = (req, res) => {
+userController.create = (req, res) => {
 
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
@@ -27,7 +28,7 @@ exports.create = (req, res) => {
         })
     })
 }
-exports.update = (req, res) => {
+userController.update = (req, res) => {
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
             message: 'Los datos son obligatorios.'
@@ -56,7 +57,7 @@ exports.update = (req, res) => {
         )
 }
 
-exports.getAll = (req, res) => {
+userController.getAll = (req, res) => {
     UserModel.find()
         .then((users) => {
             res.send(users)
@@ -68,7 +69,7 @@ exports.getAll = (req, res) => {
         })
 
 }
-exports.getOne = (req, res) => {
+userController.getOne = (req, res) => {
     UserModel.findById(req.params.id)
        
         .then((user) => {
@@ -80,7 +81,7 @@ exports.getOne = (req, res) => {
             })
         })
 }
-exports.deleteOne=(req,res)=>{
+userController.deleteOne=(req,res)=>{
     UserModel.findByIdAndRemove(req.params.id)
     .then((userdelete) => {
         res.send(userdelete)
@@ -92,7 +93,7 @@ exports.deleteOne=(req,res)=>{
     })
     }
 
-exports.login= (req, res) =>{
+userController.login= (req, res) =>{
     UserModel.findOne({email:req.body.email},(error, dataUser)=>{
         if (dataUser != null) {
             if (bcript.hashSync(req.body.password)) {
@@ -110,3 +111,4 @@ exports.login= (req, res) =>{
         }
     })
 }
+module.exports = userController
