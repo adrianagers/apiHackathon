@@ -1,18 +1,9 @@
 const UserModel = require('../models/user');
 const bcript = require('bcryptjs');
 
-/**
- * Metodo para almacenal un nuevo usuario 
- * @param {*} req => todo lo que enviamos desde el dody (formulario)
- * @param {*} res => la respuesta que se devolvera 
- */
 exports.create = (req, res) => {
-    /**
-     * El sisgno de admiracion (!) antede de la condicion  significa que estamos negando la condicion
-     */
 
     if (Object.entries(req.body).length == 0) {
-        // console.log('esta llegando')
         return res.status(400).send({
             message: 'Los datos son obligatorios.'
         })
@@ -22,7 +13,6 @@ exports.create = (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        // password: req.body.password,
         password: bcript.hashSync(req.body.password),
         phone: req.body.phone 
 
@@ -37,11 +27,6 @@ exports.create = (req, res) => {
         })
     })
 }
-/**
- * Metodo para actualizar el usuario 
- * @param {*} req =>todo lo que enviamos desde el dody (formulario)
- * @param {*} res =>la respuesta que se devolvera
- */
 exports.update = (req, res) => {
     if (Object.entries(req.body).length == 0) {
         return res.status(400).send({
@@ -52,8 +37,6 @@ exports.update = (req, res) => {
     const user = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        // password: req.body.password,
-        // password: bcript.hashSync(req.body.password),
         email: req.body.email,
         phone: req.body.phone
 
@@ -86,7 +69,6 @@ exports.getAll = (req, res) => {
 
 }
 exports.getOne = (req, res) => {
-    // console.log('aqui ta')
     UserModel.findById(req.params.id)
        
         .then((user) => {
