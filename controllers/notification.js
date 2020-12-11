@@ -1,53 +1,49 @@
-const NotificationModel =require('../models/notification')
+const NotificationModel = require('../models/notification')
 const notificationController = {};
 
-notificationController.create = (req, res) => {
-    if (Object.entries(req.body).length == 0) {
-       return res.status(400).send({
-          message: 'los datos son obligatorios'
+notificationController.create = async (req, res) => {
+    try {
+        if (Object.entries(req.body).length == 0) {
+            return res.status(400).send({
+                message: 'los datos son obligatorios'
 
-      })
-    }
-    const notification = new NotificationModel({
-        statusNotification: req.body.statusNotification,
-        messageNotification:  req.body.messageNotification
-    })
-    
-
-
-   
-    notification.save()
-        .then((datanotification) => { res.send(datanotification) })
-        .catch((error) => {
-            res.status(500) - send({
-                message: error.message
             })
+        }
+        const notification = new NotificationModel({
+            statusNotification: req.body.statusNotification,
+            messageNotification: req.body.messageNotification
         })
-}
-notificationController.update=(req,res)=>{
-    if (Object.entries(req.body).length == 0) {
-        return res.status(400).send({
-            message: 'los datos son obligatorios'
 
+        await notification.save()
+        res.send(datanotification)
+    } catch (error) {
+        res.status(500) - send({
+            message: error.message
         })
     }
+}
+notificationController.update = async (req, res) => {
+    try {
+        if (Object.entries(req.body).length == 0) {
+            return res.status(400).send({
+                message: 'los datos son obligatorios'
 
-    const notification= {
-        statusNotification: req.body.statusNotification,
-        messageNotification:  req.body.messageNotification
- }
- NotificationModel.findByIdAndUpdate(req.params.id, notification)
-        .then(
-            (notificationUpdate) => {
-                res.send(notificationUpdate)
-            }
-        ).catch(
-            (error) => {
-                res.status(500).send({
-                    message: error.message
-                })
-            }
-        )
+            })
+        }
+
+        const notification = {
+            statusNotification: req.body.statusNotification,
+            messageNotification: req.body.messageNotification
+        }
+       const notificationUpdate =  await NotificationModel.findByIdAndUpdate(req.params.id, notification)
+
+        res.send(notificationUpdate)
+
+    } catch (error) {
+        res.status(500).send({
+            message: error.message
+        })
+    }
 }
 
 module.exports = notificationController
